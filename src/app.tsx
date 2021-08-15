@@ -1,22 +1,31 @@
 import * as React from "react";
-import { ReactElement, useState } from "react";
-import logo from "./logo.svg";
+import { ReactElement } from "react";
 import "./app.css";
 
-const Button = (): ReactElement => (
-  <div>
-    <button onClick={() => chrome.runtime.sendMessage("hello world")}>
-      { "Send signal" } 
-    </button>
-  </div>
-);
+export enum Message {
+  GenID,
+  Parse,
+}
+
+export type Elements = RegExpMatchArray;
 
 export default function App(): ReactElement {
+  const [elems, setElems]: [Elements, any] = React.useState([]);
+
+  const onClick = () =>
+    chrome.tabs.query({ currentWindow: true, active: true }, (tabs) =>
+      chrome.tabs.sendMessage(
+        tabs[0].id!,
+        Message.Parse,
+        (response: Elements) => setElems(response)
+      )
+    );
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Button/>
+        <p>matches: {elems?.length}</p>
+        <button onClick={onClick}>{"parse"}</button>
       </header>
     </div>
   );
