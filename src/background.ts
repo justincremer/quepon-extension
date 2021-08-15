@@ -1,5 +1,3 @@
-
-
 // Applies a closure to the current tab
 // const onCurrentTab = async (callback: (id: number) => void) =>
 // 	chrome.tabs.query(
@@ -17,4 +15,3 @@
 
 // chrome.runtime.  .addListener((_) =>
 // 	chrome.runtime.sendMessage("ayoooo"));
-
