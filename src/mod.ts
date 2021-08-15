@@ -3,4 +3,4 @@ export enum Message {
   Parse,
 }
 
-export type Elements = RegExpMatchArray;
+export type Elements = Array<Element>;
