@@ -3,4 +3,4 @@ export enum Message {
   Parse,
 }
 
-export type Elements = Array<Element>;
+export type InputElems = Array<Element>;
